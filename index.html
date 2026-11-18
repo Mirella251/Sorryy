@@ -1,0 +1,582 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A little apology ♡</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Pacifico&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --pink: #f8cbd9;
+  --light: #fff5f8;
+  --dark: #a85f7b;
+  --deep: #c77c98;
+  --white: #fffdfd;
+  --border: #f4d5df;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--light);
+  color: var(--dark);
+  font-family: 'Quicksand', sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+#particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  bottom: -30px;
+  animation: floatUp linear forwards;
+  opacity: .65;
+}
+
+@keyframes floatUp {
+  to {
+    transform: translateY(-110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.page {
+  display: none;
+  min-height: 100vh;
+  padding: 35px 18px;
+  position: relative;
+  z-index: 1;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.page.active {
+  display: flex;
+  animation: appear .6s ease;
+}
+
+@keyframes appear {
+  from {opacity: 0; transform: translateY(12px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+.small-label {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  color: #c78aa1;
+}
+
+h1 {
+  font-family: 'Pacifico', cursive;
+  font-weight: 400;
+  font-size: clamp(32px, 8vw, 48px);
+  line-height: 1.35;
+  margin-bottom: 12px;
+  color: #bd7892;
+}
+
+h2 {
+  font-family: 'Pacifico', cursive;
+  font-weight: 400;
+  font-size: 30px;
+  margin-bottom: 15px;
+  color: #bd7892;
+}
+
+.subtitle {
+  font-size: 14px;
+  line-height: 1.8;
+  max-width: 340px;
+  margin: 0 auto 25px;
+  color: #a77b8c;
+}
+
+.main-card {
+  background: rgba(255,255,255,.85);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 30px 23px;
+  width: min(100%, 410px);
+  box-shadow: 0 12px 35px rgba(204,133,159,.12);
+  position: relative;
+}
+
+.sticker {
+  font-size: 85px;
+  display: block;
+  margin: 5px auto 20px;
+  animation: bob 3s ease-in-out infinite;
+}
+
+@keyframes bob {
+  50% {transform: translateY(-9px) rotate(3deg);}
+}
+
+.btn {
+  border: none;
+  background: #eeb5ca;
+  color: white;
+  padding: 14px 27px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 5px 13px #e9c4d2;
+  transition: .25s;
+  margin: 7px 4px;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  background: #dc9bb4;
+}
+
+.btn.secondary {
+  background: white;
+  color: #bd7892;
+  border: 1px solid var(--border);
+  box-shadow: none;
+}
+
+.tiny {
+  font-size: 11px;
+  color: #c79aac;
+  margin-top: 17px;
+}
+
+/* CARTA */
+
+.envelope {
+  width: 220px;
+  height: 145px;
+  margin: 35px auto;
+  background: #efb9ce;
+  position: relative;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 12px 25px #e9c5d2;
+  transition: .3s;
+}
+
+.envelope:hover {
+  transform: translateY(-5px);
+}
+
+.envelope:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #f8d7e2;
+  clip-path: polygon(0 0, 100% 0, 50% 60%);
+  z-index: 2;
+}
+
+.envelope:after {
+  content: "♡";
+  font-size: 40px;
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%,-50%);
+  z-index: 3;
+  color: white;
+}
+
+.envelope-label {
+  position: absolute;
+  bottom: 12px;
+  width: 100%;
+  color: white;
+  font-size: 11px;
+  letter-spacing: 2px;
+  z-index: 4;
+}
+
+.letter {
+  background: #fffdfd;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 27px 22px;
+  width: min(100%, 400px);
+  line-height: 2;
+  font-size: 14px;
+  color: #95697a;
+  text-align: left;
+  box-shadow: 0 10px 30px #eddae1;
+  display: none;
+  animation: appear .7s ease;
+}
+
+.letter.show {
+  display: block;
+}
+
+.letter h2 {
+  text-align: center;
+  font-size: 26px;
+}
+
+.letter .signature {
+  text-align: right;
+  font-family: 'Pacifico', cursive;
+  font-size: 21px;
+  color: #c77c98;
+  margin-top: 20px;
+}
+
+/* SURPRESAS */
+
+.gifts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  width: min(100%, 390px);
+  margin: 25px auto;
+}
+
+.gift {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 19px 5px;
+  box-shadow: 0 5px 15px #efdce3;
+  transition: .2s;
+  color: #b47c91;
+}
+
+.gift:hover {
+  transform: translateY(-6px) rotate(-2deg);
+}
+
+.gift span {
+  display: block;
+  font-size: 35px;
+  margin-bottom: 9px;
+}
+
+.gift small {
+  font-weight: 700;
+  font-size: 10px;
+}
+
+.surprise {
+  display: none;
+  background: white;
+  border: 1px dashed #e8b3c6;
+  padding: 20px;
+  border-radius: 20px;
+  max-width: 340px;
+  margin: 10px auto;
+  line-height: 1.8;
+  font-size: 14px;
+  animation: appear .4s ease;
+}
+
+.surprise.show {
+  display: block;
+}
+
+/* FINAL */
+
+.final-heart {
+  font-size: 85px;
+  animation: heartbeat 1.2s infinite;
+}
+
+@keyframes heartbeat {
+  50% {transform: scale(1.13);}
+}
+
+.footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 20px;
+  color: #c69aaa;
+  font-size: 10px;
+}
+
+/* CONFETTI */
+
+.confetti {
+  position: fixed;
+  top: -20px;
+  z-index: 20;
+  pointer-events: none;
+  animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(700deg);
+    opacity: 0;
+  }
+}
+
+@media(max-width:380px) {
+  .main-card {padding: 25px 15px;}
+  .gifts {gap: 7px;}
+}
+</style>
+</head>
+
+<body>
+
+<div id="particles"></div>
+
+<!-- TELA 1 -->
+<section class="page active" id="page1">
+  <div class="main-card">
+    <div class="small-label">a little something for you ♡</div>
+    <span class="sticker">🧸</span>
+    <h1>Oii, você!</h1>
+    <p class="subtitle">
+      Preparei uma coisinha especial.<br>
+      Não é muita coisa, mas foi feita com carinho. 🎀
+    </p>
+    <button class="btn" onclick="goTo(2)">
+      Abrir meu presentinho ♡
+    </button>
+    <p class="tiny">made with a little bit of love ⋆౨ৎ˚</p>
+  </div>
+</section>
+
+<!-- TELA 2 -->
+<section class="page" id="page2">
+  <div class="small-label">psst... uma cartinha para você</div>
+  <h1>Tenho algo a dizer...</h1>
+  <p class="subtitle">Clique no envelope para descobrir.</p>
+
+  <div class="envelope" onclick="openLetter()">
+    <div class="envelope-label">FOR YOU ♡</div>
+  </div>
+
+  <div class="letter" id="letter">
+    <h2>Dear you... ♡</h2>
+
+    Oi! Eu queria tirar um tempinho para te dizer
+    algumas coisas.
+
+    <br><br>
+
+    Primeiro, quero te pedir desculpas pelo que aconteceu.
+    Sei que poderia ter agido de outra maneira e sinto muito
+    se te magoei ou te deixei chateado(a).
+
+    <br><br>
+
+    Não quero que você pense que não me importo,
+    porque me importo sim! Reconheço que errei e
+    gostaria de ter a oportunidade de fazer melhor.
+
+    <br><br>
+
+    Não espero que tudo fique bem instantaneamente,
+    só queria que você soubesse que meu pedido de
+    desculpas é sincero.
+
+    <br><br>
+
+    Você é uma pessoa especial e nossa relação
+    é importante para mim. ♡
+
+    <div class="signature">com carinho, eu 🎀</div>
+  </div>
+
+  <button class="btn" id="nextLetter" style="display:none"
+    onclick="goTo(3)">
+    Tem mais uma coisinha...
+  </button>
+</section>
+
+<!-- TELA 3 -->
+<section class="page" id="page3">
+  <div class="small-label">little surprises</div>
+  <h1>Um mimo para você!</h1>
+  <p class="subtitle">
+    Escolha os presentinhos e descubra o que tem dentro.
+  </p>
+
+  <div class="gifts">
+    <button class="gift" onclick="reveal(1)">
+      <span>🎀</span>
+      <small>surpresa 01</small>
+    </button>
+
+    <button class="gift" onclick="reveal(2)">
+      <span>💌</span>
+      <small>surpresa 02</small>
+    </button>
+
+    <button class="gift" onclick="reveal(3)">
+      <span>🧁</span>
+      <small>surpresa 03</small>
+    </button>
+  </div>
+
+  <div class="surprise" id="surprise1">
+    Uma fitinha para lembrar que até os laços que
+    se desfazem podem ser refeitos. 🎀
+  </div>
+
+  <div class="surprise" id="surprise2">
+    Um lembrete: você merece carinho, respeito e
+    sinceridade. Obrigada por fazer parte da minha vida. 💗
+  </div>
+
+  <div class="surprise" id="surprise3">
+    Um bolinho imaginário para adoçar seu dia!
+    Espero que ele venha acompanhado de um sorriso. 🧁
+  </div>
+
+  <p class="tiny">abra todos para continuar ♡</p>
+
+  <button class="btn" id="nextGifts" style="display:none"
+    onclick="goTo(4)">
+    Próxima surpresa →
+  </button>
+</section>
+
+<!-- TELA 4 -->
+<section class="page" id="page4">
+  <div class="main-card">
+    <div class="small-label">one last thing...</div>
+    <span class="final-heart">💗</span>
+    <h1>Um novo começo?</h1>
+
+    <p class="subtitle">
+      Não posso mudar o que aconteceu, mas posso
+      aprender com isso e tentar fazer diferente.
+      <br><br>
+      Espero que, no seu tempo, a gente possa
+      ficar bem novamente.
+      <br><br>
+      Obrigada por ter chegado até aqui. ♡
+    </p>
+
+    <button class="btn" onclick="finish()">
+      Aceito suas desculpas ♡
+    </button>
+
+    <button class="btn secondary" onclick="finish()">
+      Preciso de um tempinho
+    </button>
+
+    <p class="tiny">qualquer que seja sua resposta, obrigado(a) por ler ♡</p>
+  </div>
+</section>
+
+<!-- TELA FINAL -->
+<section class="page" id="page5">
+  <div class="main-card">
+    <span class="sticker">🐻‍❄️</span>
+    <h1>Obrigada! ♡</h1>
+    <p class="subtitle" id="finalMessage">
+      Espero que seu dia fique um pouquinho mais bonito.
+      <br><br>
+      Sending you a little pink happiness! 🎀
+    </p>
+    <button class="btn secondary" onclick="goTo(1)">
+      Ver novamente ♡
+    </button>
+  </div>
+</section>
+
+<div class="footer">
+  made with ♡ and a little bit of pink magic
+</div>
+
+<script>
+function goTo(number) {
+  document.querySelectorAll('.page').forEach(p => {
+    p.classList.remove('active');
+  });
+
+  document.getElementById('page' + number).classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function openLetter() {
+  document.getElementById('letter').classList.add('show');
+  document.getElementById('nextLetter').style.display = 'inline-block';
+}
+
+let opened = [];
+
+function reveal(number) {
+  document.getElementById('surprise' + number).classList.add('show');
+
+  if (!opened.includes(number)) {
+    opened.push(number);
+  }
+
+  if (opened.length === 3) {
+    document.getElementById('nextGifts').style.display = 'inline-block';
+  }
+}
+
+function finish() {
+  goTo(5);
+  confetti();
+}
+
+function confetti() {
+  const emojis = ['💗','💕','🎀','♡','🌸','✨'];
+
+  for (let i = 0; i < 55; i++) {
+    const item = document.createElement('div');
+    item.className = 'confetti';
+    item.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    item.style.left = Math.random()*100 + 'vw';
+    item.style.fontSize = (14 + Math.random()*20) + 'px';
+    item.style.animationDuration = (2 + Math.random()*3) + 's';
+
+    document.body.appendChild(item);
+    setTimeout(() => item.remove(), 5000);
+  }
+}
+
+// Coraçõezinhos flutuantes
+function createParticle() {
+  const particle = document.createElement('div');
+  particle.className = 'particle';
+
+  const emojis = ['♡','♥','✿','✨','🎀'];
+  particle.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+
+  particle.style.left = Math.random()*100 + 'vw';
+  particle.style.fontSize = (12 + Math.random()*15) + 'px';
+  particle.style.animationDuration = (7 + Math.random()*7) + 's';
+
+  document.getElementById('particles').appendChild(particle);
+
+  setTimeout(() => particle.remove(), 15000);
+}
+
+setInterval(createParticle, 650);
+</script>
+
+</body>
+</html>
